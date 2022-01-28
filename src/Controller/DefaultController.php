@@ -4,6 +4,7 @@
 
  class DefaultController extends AbstractController
  {
+     #[Route('/', name: 'front_index')]
      public function index(){
          return $this->render('Default/index.html.twig');
      }
