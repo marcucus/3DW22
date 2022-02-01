@@ -1,0 +1,31 @@
+<html>
+<body>
+<script src="https://kit.fontawesome.com/59366fd727.js" crossorigin="anonymous"></script>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-item nav-link" href="/">Accueil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-item nav-link" href="/category">Categories</a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+      {% if app.user %}
+          <div class="nav-item nav-link pull-right"><i class="fas fa-user"></i> {{ app.user.email }}</div>
+
+                {% else %}
+          <a class="nav-item nav-link pull-right" href="/login"><i class="fas fa-sign-in-alt"></i> Login</a>
+
+      {% endif %}
+            {% if app.user %}
+                <a class="nav-item nav-link pull-right" href="{{ path('app_logout') }}"><i class="fas fa-bed"></i> Logout</a>
+            {% else %}
+                <a class="nav-item nav-link pull-right" href="/register"><i class="fas fa-user"></i> Register</a>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+</body>
+</html>

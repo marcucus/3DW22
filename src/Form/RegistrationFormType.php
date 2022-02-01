@@ -20,16 +20,17 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('firstName', TextType::class,[
-                'label' => 'Prénom'
+                'label' => 'Prénom : '
             ])
             ->add('lastName', TextType::class,[
-                'label' => 'Nom'
+                'label' => 'Nom : '
             ])
             ->add('email')
             ->add('telephone', TelType::class,[
-                'label' => 'Téléphone'
+                'label' => 'Téléphone : '
             ])
             ->add('agreeTerms', CheckboxType::class, [
+                'label' => 'Conditions d\'utilisation : ',
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
@@ -40,6 +41,7 @@ class RegistrationFormType extends AbstractType
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
+                'label' => 'Mot de passe : ',
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [

@@ -3,6 +3,7 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
+{{ include('header.html.twig') }}
     <div class="container">
         <form method="post">
             {% if error %}
@@ -35,9 +36,9 @@
                 </label>
             </div>
             #}
-
+            <br>
             <button class="btn btn-lg btn-primary" type="submit">
-                Sign in
+                Se connecter
             </button>
         </form>
     </div>
