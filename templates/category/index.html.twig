@@ -7,7 +7,11 @@
     {% if app.user %}
     <div class="container">
     <h1>Catégories index</h1>
-
+        <div class="mt-5">
+            <div class="count">
+               Nombre total de catégories : {{ categories.getTotalItemCount }}
+            </div>
+        </div>
     <table class="table">
         <thead>
             <tr>
@@ -35,7 +39,9 @@
         {% endfor %}
         </tbody>
     </table>
-
+        <div class="navigation">
+            {{ knp_pagination_render(categories) }}
+        </div>
     <a href="{{ path('category_new') }}" class="btn btn-success">Nouvelle catégorie</a>
 
         {% else %}
