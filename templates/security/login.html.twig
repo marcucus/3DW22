@@ -3,8 +3,8 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-{{ include('header.html.twig') }}
-    <div class="container">
+    <div class="container mt-5">
+        <div class="jumbotron mx-auto">
         <form method="post">
             {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -41,5 +41,6 @@
                 Se connecter
             </button>
         </form>
+    </div>
     </div>
 {% endblock %}

@@ -5,12 +5,17 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Intl;
 use App\Entity\Book;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use Vich\UploaderBundle\Form\Type\VichImageType;
+use Vich\UploaderBundle\Mapping\Annotation\UploadableField;
 
 class BookCrudController extends AbstractCrudController
 {
@@ -28,10 +33,9 @@ class BookCrudController extends AbstractCrudController
             DateField::new('publishAt','Publication'),
             TextField::new('author','Auteur')->setColumns(8)->hideOnIndex(),
             NumberField::new('nbPage','Nombre de page')->setColumns(8),
-            TextField::new('image')->setColumns(8),
+            ImageField::new('imageFile')->setUploadDir('app.path.book_images'),
             NumberField::new('nbExemplaire','Nombre d\'exemplaires')->setColumns(8),
             BooleanField::new('isActive','Activé ?')->setColumns(8),
-            AssociationField::new('user','Créer par:')->setColumns(8)->hideOnIndex(),
         ];
     }
 }

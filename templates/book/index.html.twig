@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BookController!{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Auteur</th>
+            <th>Nombre</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+    {% for book in books %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.nbExemplaire }}</td>
+                <td>
+                    {% set isEmprunt=false %}
+                    {% for emprunt in book.emprunts %}
+                        {% if emprunt.user == app.user %}
+                            <a href="{{ path('book_retourner',{'id':emprunt.id}) }}" class="btn btn-danger">Retourner</a>
+                            {% set isEmprunt=true %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if isEmprunt==false %}
+                    <a href="{{ path('book_emprunt',{'id':book.id}) }}" class="btn btn-success">Emprunter</a>
+                    {% endif %}
+
+                </td>
+            </tr>
+    {% else %}
+        <tr>
+            <td colspan="4">no records found</td>
+        </tr>
+    {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

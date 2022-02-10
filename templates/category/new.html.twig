@@ -3,9 +3,13 @@
 {% block title %}Nouvelle Catégorie{% endblock %}
 
 {% block body %}
+<div class="container">
+    <div class="jumbotron text-center mx-auto">
     <h1>Créer une nouvelle catégorie</h1>
 
     {{ include('category/_form.html.twig') }}
 
     <a href="{{ path('category_index') }}" class="btn btn-info">Retour</a>
+    </div>
+</div>
 {% endblock %}

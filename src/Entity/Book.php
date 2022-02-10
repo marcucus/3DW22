@@ -6,7 +6,13 @@ use App\Repository\BookRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\DocBlock\Tags\Var_;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
+/**
+ * @Vich\Uploadable
+ */
 #[ORM\Entity(repositoryClass: BookRepository::class)]
 class Book
 {
@@ -36,8 +42,17 @@ class Book
     #[ORM\Column(type: 'integer')]
     private $nbPage;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @var string
+     */
     private $image;
+
+    /**
+     * @Vich\UploadableField(mapping="book_images", fileNameProperty="image")
+     * @var File
+     */
+    private $imageFile;
 
     #[ORM\Column(type: 'integer')]
     private $nbExemplaire;
@@ -52,11 +67,15 @@ class Book
     #[ORM\ManyToMany(targetEntity: Category::class)]
     private $category;
 
+    #[ORM\OneToMany(mappedBy: 'book', targetEntity: Emprunt::class)]
+    private $emprunts;
+
     public function __construct()
     {
         $this->category = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();
+        $this->emprunts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -160,6 +179,24 @@ class Book
         return $this;
     }
 
+    public function setImageFile(File $image = null)
+    {
+        $this->imageFile = $image;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($image) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
     public function getNbExemplaire(): ?int
     {
         return $this->nbExemplaire;
@@ -216,6 +253,36 @@ class Book
     public function removeCategory(Category $category): self
     {
         $this->category->removeElement($category);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Emprunt[]
+     */
+    public function getEmprunts(): Collection
+    {
+        return $this->emprunts;
+    }
+
+    public function addEmprunt(Emprunt $emprunt): self
+    {
+        if (!$this->emprunts->contains($emprunt)) {
+            $this->emprunts[] = $emprunt;
+            $emprunt->setBook($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEmprunt(Emprunt $emprunt): self
+    {
+        if ($this->emprunts->removeElement($emprunt)) {
+            // set the owning side to null (unless already changed)
+            if ($emprunt->getBook() === $this) {
+                $emprunt->setBook(null);
+            }
+        }
 
         return $this;
     }

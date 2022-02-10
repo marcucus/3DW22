@@ -1,29 +1,20 @@
-{{ include('header.html.twig') }}
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+{% extends('base.html.twig') %}
 
-    <title>Adrien MARQUES</title>
-</head>
-<body>
-<div class="jumbotron">
+{% block title %} Home {% endblock %}
 
-    <table>
-        <tr>
-            <td>
-                <img src="{{ asset('images/cvtic.png') }}" height="42" width="42"><h1> UE 3DW22 </h1>
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                Voici le projet de l'UE 3DW22.<br>
-            </td>
-        </tr>
-    </table>
-    <hr class="my-4">
+{% block body %}
+<div class="container">
+    <div class="jumbotron text-center mx-auto">
+        <h1>Bienvenue dans notre bibliothèque</h1>
+        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident,
+            sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+        <a href="{{ path("app_login") }}" class="btn btn-success">Connectez-vous</a>
+        <a href="{{ path("app_register") }}" class="btn btn-danger">Incrivez-vous</a>
+    </div>
 </div>
-</body>
-</html>
+{% endblock %}
