@@ -4,9 +4,15 @@
 
 {% block body %}
 <div class="container mt-5">
-
-    <table class="table">
-        <thead>
+    <div class="jumbotron text-center mx-auto">
+        <h1>Livres index</h1>
+        <div>
+            <div class="count">
+                Nombre total de livres : {{ books.getTotalItemCount }}
+            </div>
+        </div>
+    <table class="table table-striped mt-5">
+        <thead class="thead-dark">
         <tr>
             <th>Titre</th>
             <th>Auteur</th>
@@ -41,5 +47,9 @@
     {% endfor %}
         </tbody>
     </table>
+    <div class="navigation">
+        {{ knp_pagination_render(books) }}
+    </div>
+</div>
 </div>
 {% endblock %}

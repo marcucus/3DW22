@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catégorie{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="jumbotron text-center mx-auto">
+            <h1>Mon Profil</h1>
+            <table class="table table-striped mt-5">
+                <thead class="thead-dark ">
+                    <tr>
+                        <th>Numéro</th>
+                        <th>E-mail</th>
+                        <th>Prénom</th>
+                        <th>Nom</th>
+                        <th>Téléphone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ app.user.id }}</td>
+                        <td>{{ app.user.email }}</td>
+                        <td>{{ app.user.firstName }}</td>
+                        <td>{{ app.user.lastName }}</td>
+                        <td>{{ app.user.telephone }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

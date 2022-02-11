@@ -6,14 +6,14 @@ use App\Repository\BookRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use phpDocumentor\Reflection\DocBlock\Tags\Var_;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
+
+#[ORM\Entity(repositoryClass: BookRepository::class)]
 /**
  * @Vich\Uploadable
  */
-#[ORM\Entity(repositoryClass: BookRepository::class)]
 class Book
 {
     #[ORM\Id]
@@ -42,10 +42,7 @@ class Book
     #[ORM\Column(type: 'integer')]
     private $nbPage;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @var string
-     */
+    #[ORM\Column(type: "string",length: 255, nullable: true)]
     private $image;
 
     /**
@@ -179,22 +176,22 @@ class Book
         return $this;
     }
 
-    public function setImageFile(File $image = null)
+    public function getImageFile(): ?File
     {
-        $this->imageFile = $image;
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?File $imageFile = null)
+    {
+        $this->imageFile = $imageFile;
 
         // VERY IMPORTANT:
         // It is required that at least one field changes if you are using Doctrine,
         // otherwise the event listeners won't be called and the file is lost
-        if ($image) {
+        if (!null == $imageFile) {
             // if 'updatedAt' is not defined in your entity, use another property
             $this->updatedAt = new \DateTimeImmutable();
         }
-    }
-
-    public function getImageFile()
-    {
-        return $this->imageFile;
     }
 
     public function getNbExemplaire(): ?int

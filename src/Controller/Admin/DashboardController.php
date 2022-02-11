@@ -37,7 +37,7 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('3dw22');
+            ->setTitle('Pannel Administration');
     }
 
     public function configureMenuItems(): iterable

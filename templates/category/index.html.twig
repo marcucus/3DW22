@@ -4,16 +4,16 @@
 
 {% block body %}
     {% if app.user %}
-<div class="container">
+<div class="container mt-5">
     <div class="jumbotron text-center mx-auto">
     <h1>Catégories index</h1>
-        <div class="mt-5">
+        <div>
             <div class="count">
                Nombre total de catégories : {{ categories.getTotalItemCount }}
             </div>
         </div>
-    <table class="table">
-        <thead>
+    <table class="table table-striped mt-5">
+        <thead class="thead-dark">
             <tr>
                 <th>Numéro</th>
                 <th>Nom</th>

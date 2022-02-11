@@ -16,6 +16,7 @@ use App\Entity\Book;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use Vich\UploaderBundle\Mapping\Annotation\UploadableField;
+use Vich\UploaderBundle\VichUploaderBundle;
 
 class BookCrudController extends AbstractCrudController
 {
@@ -33,7 +34,7 @@ class BookCrudController extends AbstractCrudController
             DateField::new('publishAt','Publication'),
             TextField::new('author','Auteur')->setColumns(8)->hideOnIndex(),
             NumberField::new('nbPage','Nombre de page')->setColumns(8),
-            ImageField::new('imageFile')->setUploadDir('app.path.book_images'),
+            TextareaField::new('imageFile')->hideOnIndex()->setFormType(VichImageType::class)->setColumns(8),
             NumberField::new('nbExemplaire','Nombre d\'exemplaires')->setColumns(8),
             BooleanField::new('isActive','Activé ?')->setColumns(8),
         ];
